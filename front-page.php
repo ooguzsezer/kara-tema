@@ -180,26 +180,6 @@
   </div>
 </section>
 
-<!-- İletişim -->
-<section class="section contact-bg" id="iletisim">
-  <div class="container">
-    <span class="section__tag">İletişim</span>
-    <h2 class="section__title">Bize Ulaşın</h2>
-    <div class="contact-grid">
-      <div><?php echo do_shortcode('[kara_iletisim]'); ?></div>
-      <div class="contact-info">
-        <div><p class="ci-label">Müşteri Hizmetleri</p><p class="ci-value">0850 000 0 000</p></div>
-        <div><p class="ci-label">E-posta</p><p class="ci-value"><?php echo antispambot(get_option('admin_email')); ?></p></div>
-        <div><p class="ci-label">Adres</p><p class="ci-value">Levent, İstanbul, Türkiye</p></div>
-        <div>
-          <p class="ci-label">Çalışma Saatleri</p>
-          <p class="ci-value">Pzt–Cum 09:00–18:00</p>
-          <p style="font-size:0.8rem;color:var(--muted);">Hasar hattı 7/24 açık</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <script>
 function toggleFaq(el) {
