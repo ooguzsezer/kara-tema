@@ -44,6 +44,40 @@
   </div>
 </footer>
 
+<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Yukarı çık">&#8593;</button>
+
+<style>
+#scroll-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 42px;
+  height: 42px;
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s, visibility 0.25s, background 0.2s;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#scroll-top.show { opacity: 1; visibility: visible; }
+#scroll-top:hover { background: var(--blue-h); }
+</style>
+
+<script>
+var btn = document.getElementById('scroll-top');
+window.addEventListener('scroll', function() {
+  btn.classList.toggle('show', window.scrollY > 400);
+});
+</script>
+
 <?php wp_footer(); ?>
 </body>
 </html>
