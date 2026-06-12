@@ -32,13 +32,43 @@ function kara_enqueue() {
 add_action( 'wp_enqueue_scripts', 'kara_enqueue' );
 
 
+function kara_teklif_shortcode( $atts ) {
+    ob_start(); ?>
+    <form class="quote-form" method="post" action="">
+        <?php wp_nonce_field( 'kara_teklif', 'kara_nonce' ); ?>
+        <label>Sigorta Türü</label>
+        <select name="kara_tur" required>
+            <option value="" disabled selected>Seçiniz...</option>
+            <option value="trafik">🚗 Trafik Sigortası</option>
+            <option value="kasko">🛡️ Kasko</option>
+            <option value="konut">🏠 Konut Sigortası</option>
+            <option value="saglik">❤️ Sağlık Sigortası</option>
+            <option value="seyahat">✈️ Seyahat Sigortası</option>
+            <option value="iş-yeri">🏢 İş Yeri Sigortası</option>
+        </select>
+        <label>Ad Soyad</label>
+        <input type="text"  name="kara_ad"    placeholder="Adınız Soyadınız" required>
+        <label>Telefon</label>
+        <input type="tel"   name="kara_tel"   placeholder="05XX XXX XX XX"   required>
+        <label>E-posta</label>
+        <input type="email" name="kara_email" placeholder="ornek@mail.com"   required>
+        <button type="submit" class="btn btn--gold">Ücretsiz Teklif Al →</button>
+    </form>
+    <p class="quote-disclaimer">Kişisel verileriniz KVKK kapsamında korunur.</p>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode( 'kara_teklif_formu', 'kara_teklif_shortcode' );
+
+
 function kara_contact_shortcode( $atts ) {
     ob_start(); ?>
     <form class="contact-form" method="post" action="">
         <?php wp_nonce_field( 'kara_contact', 'kara_nonce' ); ?>
-        <input type="text"     name="kara_ad"    placeholder="Adınız"         required>
-        <input type="email"    name="kara_email" placeholder="E-posta"        required>
-        <textarea              name="kara_mesaj" placeholder="Mesajınız..."   required></textarea>
+        <input type="text"     name="kara_ad"    placeholder="Adınız Soyadınız" required>
+        <input type="email"    name="kara_email" placeholder="E-posta adresiniz" required>
+        <input type="tel"      name="kara_tel"   placeholder="Telefon numaranız">
+        <textarea              name="kara_mesaj" placeholder="Mesajınız..."      required></textarea>
         <button type="submit" class="btn btn--primary">Gönder</button>
     </form>
     <?php
