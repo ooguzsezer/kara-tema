@@ -6,7 +6,10 @@
           <div class="logo-shield">🛡</div>
           <?php bloginfo('name'); ?>
         </a>
-        <p>Türkiye'nin güvenilir sigorta platformu. Hızlı teklif, anlık poliçe, 7/24 destek.</p>
+        <p><?php echo tp('footer_aciklama',"Türkiye'nin güvenilir sigorta platformu. Hızlı teklif, anlık poliçe, 7/24 destek."); ?></p>
+        <?php $sosyal = tepetrafik_sosyal_ikonlar(); if($sosyal): ?>
+        <div class="sosyal-bar"><?php echo $sosyal; ?></div>
+        <?php endif; ?>
       </div>
       <div class="footer-col">
         <h4>Ürünler</h4>
@@ -39,7 +42,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span class="footer-copy">&copy; <?php echo date('Y'); ?>, Tepe Trafik - <a href="https://underlineclick.com/agency/" target="_blank" rel="noopener">UnderlineClick</a></span>
+      <span class="footer-copy"><?php echo tp('telif', '&copy; ' . date('Y') . ', Tepe Trafik'); ?> - <a href="https://underlineclick.com/agency/" target="_blank" rel="noopener" style="color:#fff;">UnderlineClick</a></span>
     </div>
   </div>
 </footer>

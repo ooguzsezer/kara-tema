@@ -1,0 +1,98 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 2,
+  "settings": {
+    "color": {
+      "defaultPalette": false,
+      "palette": [
+        { "slug": "mavi",       "color": "#1a4f9e", "name": "Ana Mavi" },
+        { "slug": "koyu-mavi",  "color": "#1b2a4a", "name": "Koyu Lacivert" },
+        { "slug": "acik-mavi",  "color": "#eef2fb", "name": "Açık Mavi" },
+        { "slug": "text",       "color": "#2c3345", "name": "Metin" },
+        { "slug": "muted",      "color": "#6b7280", "name": "Soluk Metin" },
+        { "slug": "border",     "color": "#dde2ea", "name": "Kenarlık" },
+        { "slug": "beyaz",      "color": "#ffffff", "name": "Beyaz" },
+        { "slug": "arka-plan",  "color": "#f4f6f9", "name": "Arka Plan" },
+        { "slug": "kirmizi",    "color": "#c0392b", "name": "Hasar Kırmızı" }
+      ],
+      "gradients": [
+        {
+          "slug": "lacivert-mavi",
+          "gradient": "linear-gradient(135deg, #1b2a4a 0%, #1a4f9e 100%)",
+          "name": "Lacivert → Mavi"
+        }
+      ]
+    },
+    "typography": {
+      "defaultFontSizes": false,
+      "fontFamilies": [
+        {
+          "slug": "inter",
+          "name": "Inter",
+          "fontFamily": "'Inter', 'Helvetica Neue', Arial, sans-serif",
+          "fontFace": [
+            {
+              "src": ["https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"],
+              "fontWeight": "400 800",
+              "fontStyle": "normal"
+            }
+          ]
+        }
+      ],
+      "fontSizes": [
+        { "slug": "kucuk",   "size": "0.82rem", "name": "Küçük" },
+        { "slug": "normal",  "size": "1rem",    "name": "Normal" },
+        { "slug": "orta",    "size": "1.2rem",  "name": "Orta" },
+        { "slug": "buyuk",   "size": "1.6rem",  "name": "Büyük" },
+        { "slug": "cok-buyuk","size": "2.2rem", "name": "Çok Büyük" }
+      ]
+    },
+    "spacing": {
+      "units": ["px", "rem", "%"]
+    },
+    "layout": {
+      "contentSize": "780px",
+      "wideSize":    "1100px"
+    },
+    "blocks": {
+      "core/button": {
+        "color": {
+          "text":       true,
+          "background": true
+        }
+      }
+    }
+  },
+  "styles": {
+    "color": {
+      "background": "#ffffff",
+      "text":       "#2c3345"
+    },
+    "typography": {
+      "fontFamily": "'Inter', 'Helvetica Neue', Arial, sans-serif",
+      "fontSize":   "15px",
+      "lineHeight": "1.65"
+    },
+    "elements": {
+      "link": {
+        "color": { "text": "#1a4f9e" }
+      },
+      "h1": { "typography": { "fontWeight": "700", "lineHeight": "1.2" } },
+      "h2": { "typography": { "fontWeight": "700", "lineHeight": "1.25" } },
+      "h3": { "typography": { "fontWeight": "600" } }
+    },
+    "blocks": {
+      "core/separator": {
+        "color": { "text": "#dde2ea" }
+      },
+      "core/quote": {
+        "border": { "left": "3px solid #1a4f9e" },
+        "color":  { "background": "#f4f6f9", "text": "#6b7280" },
+        "spacing": { "padding": { "left": "1.25rem" } }
+      },
+      "core/table": {
+        "border": { "color": "#dde2ea", "width": "1px" }
+      }
+    }
+  }
+}

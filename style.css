@@ -648,6 +648,29 @@ a:hover { color: var(--blue-h); }
 
 .footer-copy a { color: #fff; }
 
+.logo-slogan {
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--muted);
+  margin-left: 0.25rem;
+}
+
+.sosyal-bar { display: flex; gap: 0.5rem; margin-top: 1rem; }
+
+.sosyal-icon {
+  width: 32px; height: 32px;
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.6);
+  border-radius: 3px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  transition: background 0.2s, color 0.2s;
+  text-decoration: none;
+}
+.sosyal-icon::after { display: none; }
+.sosyal-icon:hover  { background: var(--blue); color: #fff; }
+
 /* ── Page Template ────────────────────────────────── */
 .page-wrap {
   padding: 3rem 0 5rem;
