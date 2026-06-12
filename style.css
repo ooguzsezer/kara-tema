@@ -521,7 +521,10 @@ img.custom-logo {
 .hotline-row strong { display: block; color: #fff; font-size: 0.85rem; }
 
 /* ── FAQ ──────────────────────────────────────────── */
-.faq-wrap { margin-top: 2.5rem; }
+.faq-wrap {
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
 
 .faq-item { border-bottom: 1px solid var(--border); }
 
