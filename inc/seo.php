@@ -122,8 +122,11 @@ function tepetrafik_schema() {
         ],
     ];
 
-    $logo = wp_get_attachment_image_src( get_theme_mod('custom_logo'), 'full' );
-    if ( $logo ) $schema['logo'] = $logo[0];
+    $logo_id = get_theme_mod( 'custom_logo' );
+    if ( $logo_id ) {
+        $logo = wp_get_attachment_image_src( $logo_id, 'full' );
+        if ( $logo ) $schema['logo'] = $logo[0];
+    }
 
     echo '<script type="application/ld+json">' . wp_json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . "</script>\n";
 }

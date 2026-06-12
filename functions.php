@@ -121,7 +121,7 @@ function kara_handle_teklif() {
         );
     }
 }
-add_action( 'init', 'kara_handle_teklif' );
+if ( ! is_admin() ) add_action( 'init', 'kara_handle_teklif' );
 
 
 function kara_handle_contact() {
@@ -148,4 +148,4 @@ function kara_handle_contact() {
         );
     }
 }
-add_action( 'init', 'kara_handle_contact' );
+if ( ! is_admin() ) add_action( 'init', 'kara_handle_contact' );
