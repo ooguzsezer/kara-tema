@@ -27,17 +27,22 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="<?php echo esc_url(home_url('/')); ?>" class="site-logo">
-      <?php if ( has_custom_logo() ) : ?>
+    <?php if ( has_custom_logo() ) : ?>
+      <div class="site-logo">
         <?php the_custom_logo(); ?>
-      <?php else : ?>
+        <?php if ( tp('logo_text') ) : ?>
+          <span class="logo-slogan"><?php echo tp('logo_text'); ?></span>
+        <?php endif; ?>
+      </div>
+    <?php else : ?>
+      <a href="<?php echo esc_url(home_url('/')); ?>" class="site-logo">
         <div class="logo-shield">🛡</div>
         <?php echo tp('site_adi', get_bloginfo('name')); ?>
-      <?php endif; ?>
-      <?php if ( tp('logo_text') ) : ?>
-        <span class="logo-slogan"><?php echo tp('logo_text'); ?></span>
-      <?php endif; ?>
-    </a>
+        <?php if ( tp('logo_text') ) : ?>
+          <span class="logo-slogan"><?php echo tp('logo_text'); ?></span>
+        <?php endif; ?>
+      </a>
+    <?php endif; ?>
 
     <nav class="site-nav">
       <?php

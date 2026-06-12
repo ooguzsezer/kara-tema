@@ -183,11 +183,15 @@ a:hover { color: var(--blue-h); }
 }
 .site-logo::after { display: none; }
 
-.site-logo .custom-logo-link,
-.site-logo .custom-logo-link img {
-  display: block;
+img.custom-logo {
   height: 42px;
   width: auto;
+  display: block;
+}
+
+.custom-logo-link {
+  display: flex;
+  align-items: center;
 }
 
 .logo-shield {
