@@ -1,6 +1,8 @@
 <?php
 
 require_once get_template_directory() . '/inc/customizer.php';
+require_once get_template_directory() . '/inc/seo.php';
+require_once get_template_directory() . '/inc/security.php';
 
 function kara_setup() {
     add_theme_support( 'title-tag' );
