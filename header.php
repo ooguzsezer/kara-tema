@@ -63,8 +63,7 @@
     </nav>
 
     <div class="header-btn">
-      <a href="#hasar"   class="btn btn--outline">Hasar Bildir</a>
-      <a href="#urunler" class="btn btn--blue"><?php echo tp('hero_buton1','Teklif Al'); ?></a>
+<a href="#urunler" class="btn btn--blue"><?php echo tp('hero_buton1','Teklif Al'); ?></a>
     </div>
   </div>
 </header>
