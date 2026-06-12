@@ -98,20 +98,11 @@ function tepetrafik_sitemap_output() {
 add_action( 'template_redirect', 'tepetrafik_sitemap_output' );
 
 
-/* ── robots.txt'e sitemap URL'si ekle ───────────────── */
-add_filter( 'robots_txt', function( $output, $public ) {
-    if ( $public ) {
-        $output .= "\nSitemap: " . home_url('/sitemap.xml') . "\n";
-    }
-    return $output;
-}, 10, 2 );
-
-
-/* ── robots.txt kuralları ────────────────────────────── */
+/* ── robots.txt kuralları + sitemap ─────────────────── */
 add_filter( 'robots_txt', function( $output, $public ) {
     if ( ! $public ) return $output;
 
-    $custom = "User-agent: *\n";
+    $custom  = "User-agent: *\n";
     $custom .= "Disallow: /wp-admin/\n";
     $custom .= "Disallow: /wp-includes/\n";
     $custom .= "Disallow: /wp-login.php\n";
@@ -123,7 +114,7 @@ add_filter( 'robots_txt', function( $output, $public ) {
     $custom .= "\nSitemap: " . home_url('/sitemap.xml') . "\n";
 
     return $custom;
-}, 20, 2 );
+}, 10, 2 );
 
 
 /* ── Tema aktive edilince rewrite flush et ───────────── */

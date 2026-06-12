@@ -102,7 +102,7 @@ function tepetrafik_meta_box_render( $post ) {
 /* ── Kaydet ──────────────────────────────────────────── */
 function tepetrafik_meta_box_save( $post_id ) {
     if ( ! isset( $_POST['tepetrafik_seo_nonce'] ) ) return;
-    if ( ! wp_verify_nonce( $_POST['tepetrafik_seo_nonce'], 'tepetrafik_save' ) ) return;
+    if ( ! wp_verify_nonce( $_POST['tepetrafik_seo_nonce'], 'tepetrafik_seo_save' ) ) return;
     if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) return;
     if ( ! current_user_can( 'edit_post', $post_id ) ) return;
 
