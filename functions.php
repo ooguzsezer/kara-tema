@@ -38,10 +38,23 @@ function kara_enqueue() {
 add_action( 'wp_enqueue_scripts', 'kara_enqueue' );
 
 
+/* ── Form rate limiting: IP başına 5 dakikada 1 gönderim ── */
+function kara_form_rate_ok( string $form_id ): bool {
+    $ip  = $_SERVER['REMOTE_ADDR'] ?? '';
+    $key = 'tp_form_' . $form_id . '_' . md5( $ip );
+    if ( get_transient( $key ) ) return false;
+    set_transient( $key, 1, 5 * MINUTE_IN_SECONDS );
+    return true;
+}
+
+
 function kara_teklif_shortcode( $atts ) {
     ob_start(); ?>
     <form class="quote-form" method="post" action="">
-        <?php wp_nonce_field( 'kara_teklif', 'kara_nonce' ); ?>
+        <?php wp_nonce_field( 'kara_teklif', 'kara_teklif_nonce' ); ?>
+        <div style="display:none!important" aria-hidden="true">
+            <input type="text" name="kara_website" value="" tabindex="-1" autocomplete="off">
+        </div>
         <label>Sigorta Türü</label>
         <select name="kara_tur" required>
             <option value="" disabled selected>Seçiniz...</option>
@@ -70,7 +83,10 @@ add_shortcode( 'kara_teklif_formu', 'kara_teklif_shortcode' );
 function kara_contact_shortcode( $atts ) {
     ob_start(); ?>
     <form class="contact-form" method="post" action="">
-        <?php wp_nonce_field( 'kara_contact', 'kara_nonce' ); ?>
+        <?php wp_nonce_field( 'kara_contact', 'kara_contact_nonce' ); ?>
+        <div style="display:none!important" aria-hidden="true">
+            <input type="text" name="kara_website" value="" tabindex="-1" autocomplete="off">
+        </div>
         <input type="text"     name="kara_ad"    placeholder="Adınız Soyadınız" required>
         <input type="email"    name="kara_email" placeholder="E-posta adresiniz" required>
         <input type="tel"      name="kara_tel"   placeholder="Telefon numaranız">
@@ -83,19 +99,51 @@ function kara_contact_shortcode( $atts ) {
 add_shortcode( 'kara_iletisim', 'kara_contact_shortcode' );
 
 
-function kara_handle_contact() {
-    if ( empty( $_POST['kara_nonce'] ) ) return;
-    if ( ! wp_verify_nonce( $_POST['kara_nonce'], 'kara_contact' ) ) return;
+function kara_handle_teklif() {
+    if ( $_SERVER['REQUEST_METHOD'] !== 'POST' ) return;
+    if ( empty( $_POST['kara_teklif_nonce'] ) ) return;
+    if ( ! wp_verify_nonce( $_POST['kara_teklif_nonce'], 'kara_teklif' ) ) return;
+    if ( ! empty( $_POST['kara_website'] ) ) return;
+    if ( ! kara_form_rate_ok( 'teklif' ) ) return;
 
-    $ad     = sanitize_text_field( $_POST['kara_ad']    ?? '' );
-    $email  = sanitize_email(      $_POST['kara_email'] ?? '' );
-    $mesaj  = sanitize_textarea_field( $_POST['kara_mesaj'] ?? '' );
+    $allowed_tur = [ 'trafik', 'kasko', 'konut', 'saglik', 'seyahat', 'iş-yeri' ];
+    $tur   = in_array( $_POST['kara_tur'] ?? '', $allowed_tur, true ) ? $_POST['kara_tur'] : '';
+    $ad    = sanitize_text_field( $_POST['kara_ad']    ?? '' );
+    $tel   = sanitize_text_field( $_POST['kara_tel']   ?? '' );
+    $email = sanitize_email(      $_POST['kara_email'] ?? '' );
+
+    if ( $tur && $ad && $tel && $email ) {
+        wp_mail(
+            get_option( 'admin_email' ),
+            'Yeni Teklif Talebi: ' . $ad,
+            "Sigorta Türü: $tur\nAd Soyad: $ad\nTelefon: $tel\nE-posta: $email",
+            [ 'Reply-To: ' . $email ]
+        );
+    }
+}
+add_action( 'init', 'kara_handle_teklif' );
+
+
+function kara_handle_contact() {
+    if ( $_SERVER['REQUEST_METHOD'] !== 'POST' ) return;
+    if ( empty( $_POST['kara_contact_nonce'] ) ) return;
+    if ( ! wp_verify_nonce( $_POST['kara_contact_nonce'], 'kara_contact' ) ) return;
+    if ( ! empty( $_POST['kara_website'] ) ) return;
+    if ( ! kara_form_rate_ok( 'contact' ) ) return;
+
+    $ad    = sanitize_text_field(     $_POST['kara_ad']    ?? '' );
+    $email = sanitize_email(          $_POST['kara_email'] ?? '' );
+    $tel   = sanitize_text_field(     $_POST['kara_tel']   ?? '' );
+    $mesaj = sanitize_textarea_field( $_POST['kara_mesaj'] ?? '' );
 
     if ( $ad && $email && $mesaj ) {
+        $body  = "Ad: $ad\nE-posta: $email";
+        $body .= $tel ? "\nTelefon: $tel" : '';
+        $body .= "\n\n$mesaj";
         wp_mail(
             get_option( 'admin_email' ),
             'Yeni İletişim: ' . $ad,
-            "Ad: $ad\nE-posta: $email\n\n$mesaj",
+            $body,
             [ 'Reply-To: ' . $email ]
         );
     }

@@ -40,6 +40,10 @@ add_action( 'send_headers', function() {
     header( 'X-XSS-Protection: 1; mode=block' );
     header( 'Referrer-Policy: strict-origin-when-cross-origin' );
     header( 'Permissions-Policy: camera=(), microphone=(), geolocation=()' );
+    header( 'Strict-Transport-Security: max-age=31536000; includeSubDomains' );
+    if ( ! is_admin() ) {
+        header( "Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-ancestors 'self';" );
+    }
 } );
 
 /* ── Login hata mesajlarını maskele ─────────────────── */
@@ -75,3 +79,9 @@ add_filter( 'authenticate', function( $user, $username, $password ) {
     }
     return $user;
 }, 30, 3 );
+
+/* ── Başarılı girişte sayacı sıfırla ────────────────── */
+add_action( 'wp_login', function( $user_login, $user ) {
+    $ip  = $_SERVER['REMOTE_ADDR'] ?? '';
+    delete_transient( 'tp_login_fail_' . md5( $ip ) );
+}, 10, 2 );
