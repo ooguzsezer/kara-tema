@@ -510,7 +510,7 @@ a:hover { color: var(--blue-h); }
 .hotline-row strong { display: block; color: #fff; font-size: 0.85rem; }
 
 /* ── FAQ ──────────────────────────────────────────── */
-.faq-wrap { max-width: 680px; margin-top: 2.5rem; }
+.faq-wrap { margin-top: 2.5rem; }
 
 .faq-item { border-bottom: 1px solid var(--border); }
 
