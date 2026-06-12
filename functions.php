@@ -2,6 +2,8 @@
 
 require_once get_template_directory() . '/inc/customizer.php';
 require_once get_template_directory() . '/inc/seo.php';
+require_once get_template_directory() . '/inc/meta-fields.php';
+require_once get_template_directory() . '/inc/sitemap.php';
 require_once get_template_directory() . '/inc/security.php';
 
 function kara_setup() {
