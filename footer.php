@@ -39,12 +39,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span class="footer-copy">&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?>. Tüm hakları saklıdır. | Sigorta Acenteliği Ruhsat No: XXXX</span>
-      <div class="footer-legal">
-        <a href="#">Gizlilik</a>
-        <a href="#">KVKK</a>
-        <a href="#">Kullanım Koşulları</a>
-      </div>
+      <span class="footer-copy">&copy; <?php echo date('Y'); ?>, Tepe Trafik - <a href="https://underlineclick.com/agency/" target="_blank" rel="noopener">UnderlineClick</a></span>
     </div>
   </div>
 </footer>
