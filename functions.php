@@ -1,5 +1,7 @@
 <?php
 
+require_once get_template_directory() . '/inc/customizer.php';
+
 function kara_setup() {
     add_theme_support( 'title-tag' );
     add_theme_support( 'post-thumbnails' );
